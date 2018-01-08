@@ -5,11 +5,13 @@
  */
 package models;
 
+import recursos.interfaces.IComida;
+
 /**
  *
  * @author martasantos
  */
-public class Comida {
+public class Comida implements IComida{
     private int id_comida;
     private int tamanho;
 
@@ -32,6 +34,16 @@ public class Comida {
 
     public void setTamanho(int tamanho) {
         this.tamanho = tamanho;
+    }
+
+    @Override
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setId(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
