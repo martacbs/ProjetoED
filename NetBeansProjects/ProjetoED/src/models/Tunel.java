@@ -5,43 +5,45 @@
  */
 package models;
 
+import recursos.interfaces.ITunel;
+
 /**
  *
  * @author martasantos
  */
-public class Tunel {
-    private int id_tunel;
-    private float comprimento;
-    private float raio;
+public class Tunel implements ITunel{
 
-    public Tunel(int id_tunel, float comprimento, float raio) {
-        this.id_tunel = id_tunel;
-        this.comprimento = comprimento;
-        this.raio = raio;
+    public Tunel() {
+    }
+    
+    @Override
+    public int getDistance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int getId_tunel() {
-        return id_tunel;
+    @Override
+    public void setDistance(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setId_tunel(int id_tunel) {
-        this.id_tunel = id_tunel;
+    @Override
+    public int getRadious() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public float getComprimento() {
-        return comprimento;
+    @Override
+    public void setRadious(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setComprimento(float comprimento) {
-        this.comprimento = comprimento;
+    @Override
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public float getRaio() {
-        return raio;
-    }
-
-    public void setRaio(float raio) {
-        this.raio = raio;
+    @Override
+    public void setId(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

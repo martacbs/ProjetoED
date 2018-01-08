@@ -5,54 +5,74 @@
  */
 package models;
 
+import recursos.exceptions.ElementNotFoundException;
+import recursos.exceptions.EmptyCollectionException;
+import recursos.interfaces.IFormiga;
+import recursos.interfaces.ISala;
+import recursos.interfaces.collections.UnorderedListADT;
+
 /**
  *
  * @author martasantos
  */
-public class Sala {
-    private int id_sala;
-    private String descricao;
-    private float x;
-    private float y;
+public class Sala implements ISala{
 
-    public Sala(int id_sala, String descricao, float x, float y) {
-        this.id_sala = id_sala;
-        this.descricao = descricao;
-        this.x = x;
-        this.y = y;
+    public Sala() {
     }
 
-    public int getId_sala() {
-        return id_sala;
+    @Override
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setId_sala(int id_sala) {
-        this.id_sala = id_sala;
+    @Override
+    public void setId(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String getDescricao() {
-        return descricao;
+    @Override
+    public int getX() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    @Override
+    public void setX(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public float getX() {
-        return x;
+    @Override
+    public int getY() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setX(float x) {
-        this.x = x;
+    @Override
+    public void setY(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public float getY() {
-        return y;
+    @Override
+    public String getDescrição() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setY(float y) {
-        this.y = y;
+    @Override
+    public void setDescrição(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
+    @Override
+    public void entraFormiga(IFormiga i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IFormiga saiFormiga(int i) throws EmptyCollectionException, ElementNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public UnorderedListADT<IFormiga> listaFormigas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+       
 }

@@ -5,15 +5,29 @@
  */
 package models;
 
+import java.util.Iterator;
+import recursos.exceptions.EmptyCollectionException;
+import recursos.interfaces.IComida;
+import recursos.interfaces.ISilo;
+
 /**
  *
  * @author martasantos
  */
-public class Silo extends Sala{
-    
-    public Silo(int id_sala, String descricao, float x, float y) {
-        super(id_sala, descricao, x, y);
+public class Silo extends Sala implements ISilo{
+
+    @Override
+    public void guardaComida(IComida ic) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
+    @Override
+    public IComida retiraComida() throws EmptyCollectionException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterator<IComida> iteratorComida() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

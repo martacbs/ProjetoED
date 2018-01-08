@@ -5,33 +5,60 @@
  */
 package models;
 
+import recursos.exceptions.ElementNotFoundException;
+import recursos.exceptions.EmptyCollectionException;
+import recursos.exceptions.FormigaCheiaException;
+import recursos.interfaces.IComida;
+import recursos.interfaces.IFormiga;
+
 /**
  *
  * @author martasantos
  */
-public class Formiga {
-    private int id_formiga;
-    private int capacidadeCarga;
-
-    public Formiga(int id_formiga, int capacidadeCarga) {
-        this.id_formiga = id_formiga;
-        this.capacidadeCarga = capacidadeCarga;
+public class Formiga implements IFormiga{
+    
+    public Formiga() {
     }
 
-    public int getId_formiga() {
-        return id_formiga;
-    }
-
-    public void setId_formiga(int id_formiga) {
-        this.id_formiga = id_formiga;
-    }
-
+    @Override
     public int getCapacidadeCarga() {
-        return capacidadeCarga;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setCapacidadeCarga(int capacidadeCarga) {
-        this.capacidadeCarga = capacidadeCarga;
+    @Override
+    public void setCapacidadeCarga(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setId(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addComida(IComida ic) throws FormigaCheiaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IComida removeComida(int i) throws EmptyCollectionException, ElementNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IComida removeComida() throws EmptyCollectionException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getCarga() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   
     
 }
