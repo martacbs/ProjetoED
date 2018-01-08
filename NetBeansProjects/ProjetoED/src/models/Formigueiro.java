@@ -23,6 +23,8 @@ import recursos.interfaces.ITunel;
 public class Formigueiro implements IFormigueiro{
 
     public Formigueiro() {
+
+        
     }
 
     @Override

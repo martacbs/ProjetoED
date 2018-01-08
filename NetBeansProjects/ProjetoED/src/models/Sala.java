@@ -17,9 +17,6 @@ import recursos.interfaces.collections.UnorderedListADT;
  */
 public class Sala implements ISala{
 
-    public Sala() {
-    }
-
     @Override
     public int getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -56,7 +53,7 @@ public class Sala implements ISala{
     }
 
     @Override
-    public void setDescrição(String string) {
+    public void setDescricao(String string) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -74,5 +71,6 @@ public class Sala implements ISala{
     public UnorderedListADT<IFormiga> listaFormigas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-       
+
+
 }

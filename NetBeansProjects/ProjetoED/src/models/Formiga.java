@@ -18,6 +18,8 @@ import recursos.interfaces.IFormiga;
 public class Formiga implements IFormiga{
     
     public Formiga() {
+
+        
     }
 
     @Override
