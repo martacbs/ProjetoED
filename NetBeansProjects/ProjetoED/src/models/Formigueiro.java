@@ -22,10 +22,10 @@ import recursos.interfaces.ITunel;
  */
 public class Formigueiro implements IFormigueiro{
 
-    public Formigueiro() {
-
-        
-    }
+    private Sala salas;
+    private Formiga formigas;
+    private Tunel tunel;
+    
 
     @Override
     public ISala getEntrada() {
