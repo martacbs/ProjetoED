@@ -20,40 +20,24 @@ public class Comida implements IComida{
         this.id_comida = id_comida;
         this.tamanho_comida = tamanho_comida;
     }
-
-    public int getId_comida() {
-        return id_comida;
-    }
-
-    public void setId_comida(int id_comida) {
-        this.id_comida = id_comida;
-    }
-
-    public int getTamanho_comida() {
-        return tamanho_comida;
-    }
-
-    public void setTamanho_comida(int tamanho_comida) {
-        this.tamanho_comida = tamanho_comida;
-    }
     
-    @Override
+   @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return id_comida;
     }
 
     @Override
     public void setId(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.id_comida=id_comida;
     }
 
     @Override
     public int getTamanho() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tamanho_comida;
     }
 
     @Override
     public void setTamanho(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.tamanho_comida=tamanho_comida;
     }
 }

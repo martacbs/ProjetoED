@@ -25,40 +25,24 @@ public class Formiga implements IFormiga{
         this.capacidade_maxima = capacidade_maxima;
     }
 
-    public int getId_formiga() {
-        return id_formiga;
-    }
-
-    public void setId_formiga(int id_formiga) {
-        this.id_formiga = id_formiga;
-    }
-
-    public int getCapacidade_maxima() {
-        return capacidade_maxima;
-    }
-
-    public void setCapacidade_maxima(int capacidade_maxima) {
-        this.capacidade_maxima = capacidade_maxima;
-    }
-    
     @Override
     public int getCapacidadeCarga() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return capacidade_maxima;
     }
 
     @Override
     public void setCapacidadeCarga(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.capacidade_maxima=capacidade_maxima;
     }
 
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id_formiga;
     }
 
     @Override
     public void setId(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.id_formiga=id_formiga;
     }
 
     @Override

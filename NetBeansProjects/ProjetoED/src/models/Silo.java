@@ -16,6 +16,10 @@ import recursos.interfaces.ISilo;
  */
 public class Silo extends Sala implements ISilo{
 
+    public Silo(int id_sala, String descricao_sala, int x, int y) {
+        super(id_sala, descricao_sala, x, y);
+    }
+
     @Override
     public void guardaComida(IComida ic) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

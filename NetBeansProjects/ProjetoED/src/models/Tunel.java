@@ -14,67 +14,43 @@ import recursos.interfaces.ITunel;
 public class Tunel implements ITunel{
 
     private int id_tunel;
-    private float comprimento;
-    private float raio;
+    private int comprimento;
+    private int raio;
 
-    public Tunel(int id_tunel, float comprimento, float raio) {
+    public Tunel(int id_tunel, int comprimento, int raio) {
         this.id_tunel = id_tunel;
         this.comprimento = comprimento;
-        this.raio = raio;
-    }
-
-    public int getId_tunel() {
-        return id_tunel;
-    }
-
-    public void setId_tunel(int id_tunel) {
-        this.id_tunel = id_tunel;
-    }
-
-    public float getComprimento() {
-        return comprimento;
-    }
-
-    public void setComprimento(float comprimento) {
-        this.comprimento = comprimento;
-    }
-
-    public float getRaio() {
-        return raio;
-    }
-
-    public void setRaio(float raio) {
         this.raio = raio;
     }
     
     @Override
     public int getDistance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return comprimento;
     }
 
     @Override
     public void setDistance(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.comprimento = comprimento;
     }
 
     @Override
     public int getRadious() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return raio;
     }
 
     @Override
     public void setRadious(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.raio=raio;
     }
 
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id_tunel;
     }
 
     @Override
     public void setId(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.id_tunel = id_tunel;
     }
     
     

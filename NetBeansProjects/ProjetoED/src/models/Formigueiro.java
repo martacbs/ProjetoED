@@ -25,8 +25,13 @@ public class Formigueiro implements IFormigueiro{
     private Sala salas;
     private Formiga formigas;
     private Tunel tunel;
-    
 
+    public Formigueiro(Sala salas, Formiga formigas, Tunel tunel) {
+        this.salas = salas;
+        this.formigas = formigas;
+        this.tunel = tunel;
+    }
+ 
     @Override
     public ISala getEntrada() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

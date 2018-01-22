@@ -17,6 +17,10 @@ import recursos.interfaces.IProcessamento;
  */
 public class SalaProcessamento extends Sala implements IProcessamento{
 
+    public SalaProcessamento(int id_sala, String descricao_sala, int x, int y) {
+        super(id_sala, descricao_sala, x, y);
+    }
+
     @Override
     public void acrescentaComida(IComida ic) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

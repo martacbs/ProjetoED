@@ -19,46 +19,53 @@ public class Sala implements ISala{
 
     private int id_sala;
     private String descricao_sala;
-    private float x,y;
+    private int x,y;
+
+    public Sala(int id_sala, String descricao_sala, int x, int y) {
+        this.id_sala = id_sala;
+        this.descricao_sala = descricao_sala;
+        this.x = x;
+        this.y = y;
+    }
     
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id_sala;
     }
 
     @Override
     public void setId(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.id_sala=id_sala;
     }
 
     @Override
     public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return x;
     }
 
     @Override
     public void setX(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.x = x;
     }
 
     @Override
     public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return y;
     }
 
     @Override
     public void setY(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.y=y;
     }
 
     @Override
     public String getDescricao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return descricao_sala;
     }
 
     @Override
     public void setDescricao(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.descricao_sala=descricao_sala;
     }
 
     @Override
