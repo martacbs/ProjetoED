@@ -69,12 +69,30 @@ public class Formigueiro implements IFormigueiro{
 
     @Override
     public int getMaxY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int maxY=0;
+       for(int i=0; i<salas.getY(); i++){
+           
+           if(salas.getY()>maxY){
+               maxY=salas.getY();
+               
+           }
+          
+       }
+        return maxY;
     }
 
     @Override
     public int getMaxX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   int maxX=0;
+       for(int i=0; i<salas.getX(); i++){
+           
+           if(salas.getX()>maxX){
+               maxX=salas.getX();
+               
+           }
+          
+       }
+        return maxX;
     }
 
     @Override
