@@ -66,11 +66,11 @@ public class Formiga implements IFormiga{
                 if(capacidade_maxima==0){
                     throw new EmptyCollectionException("x");
                 }
-                if(i = ){
+               /* if(i = ){
                     
-                }
+                }*/
     }
-
+        return comida;
     }
 
     @Override

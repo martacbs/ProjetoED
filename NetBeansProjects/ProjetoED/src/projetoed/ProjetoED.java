@@ -21,11 +21,11 @@ public class ProjetoED {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Sala s1 = new Sala(1,"sala 1", 2, 1);
+      /* Sala s1 = new Sala(1,"sala 1", 2, 1);
         Formiga formiga1=new Formiga(2,3);
         Tunel t1= new Tunel(1, 12,2);
         Formigueiro f1=new Formigueiro(s1, formiga1, t1);
-        FormigueiroViewer f= new FormigueiroViewer(f1);
+        FormigueiroViewer f= new FormigueiroViewer(f1);*/
      
     }
     
