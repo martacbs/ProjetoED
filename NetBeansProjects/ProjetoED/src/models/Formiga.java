@@ -11,6 +11,7 @@ import recursos.exceptions.FormigaCheiaException;
 import recursos.interfaces.IComida;
 import recursos.interfaces.IFormiga;
 import collections.ArrayUnorderedList;
+import java.util.Iterator;
 import recursos.interfaces.collections.UnorderedListADT;
 
 /**
@@ -86,7 +87,7 @@ public class Formiga implements IFormiga{
             throw new ElementNotFoundException("Não existe esta comida nesta formiga");
         }
             
-        return comida;
+        return this.comida.remove(comida);
     }
 
     @Override

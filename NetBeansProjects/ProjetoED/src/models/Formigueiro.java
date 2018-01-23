@@ -8,6 +8,8 @@ package models;
 import collections.ArrayUnorderedList;
 import collections.Network;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import recursos.exceptions.ElementNotFoundException;
 import recursos.interfaces.IComida;
 import recursos.interfaces.IFormiga;
@@ -24,28 +26,38 @@ import recursos.interfaces.ITunel;
  */
 public class Formigueiro implements IFormigueiro{
 
-    private Sala entrada_sala;
-    private Tunel tunel;
+    private Sala entrada_formigueiro;
+    private int idtunel;
     private ArrayUnorderedList<Sala> salas;
     private ArrayUnorderedList<Formiga> formigas;
     private Network<ISala> network;
 
-    public Formigueiro(Sala entrada_sala, Tunel tunel, ArrayUnorderedList<Sala> salas, ArrayUnorderedList<Formiga> formigas) {
-        this.entrada_sala = entrada_sala;
-        this.tunel = tunel;
-        this.salas = salas;
-        this.formigas = formigas;
+    public Formigueiro(Sala entrada_formigueiro) {
+        this.entrada_formigueiro = entrada_formigueiro;
+        this.idtunel = 0;
+        salas = new ArrayUnorderedList<>();
+        formigas = new ArrayUnorderedList<>();
+        this.network = new Network<>();
+        
+        this.salas.addToRear(entrada_formigueiro);
+        
+       // this.network.addVertex(getListaSala(entrada_formigueiro.getId()));
+        
+      
+                
     }
+
+    
     
   
     @Override
     public ISala getEntrada() {
-        return this.entrada_sala;
+        return this.entrada_formigueiro;
     }
 
     @Override
     public void setEntrada(ISala isala) {
-        this.entrada_sala = entrada_sala;
+        this.entrada_formigueiro = entrada_formigueiro;
          }
 
     @Override
@@ -61,7 +73,7 @@ public class Formigueiro implements IFormigueiro{
 
     @Override
     public Iterator<ISala> iteratorBFS() {
-        return network.iteratorBFS(entrada_sala);
+        return network.iteratorBFS(entrada_formigueiro);
     }
 
     @Override
@@ -71,7 +83,30 @@ public class Formigueiro implements IFormigueiro{
 
     @Override
     public void ligaSala(ISala isala, ISala isala1, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        int distancia = (int) Math.hypot(isala.getX() - isala1.getX(), isala.getY()-isala1.getY());
+        Tunel tunel = new Tunel(this.idtunel, distancia, i);
+    
+        try {
+            this.network.addEdge(isala1, isala1, tunel);
+            this.idtunel++;
+        } catch (ElementNotFoundException ex) {
+            Logger.getLogger(Formigueiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    
+    public ISala getListaSala(int j){
+        
+        Iterator<ISala> salasf = (Iterator<ISala)this.salas.getIterator();
+        
+        if(salasf.hasNext()){
+            ISala next = salasf.next();
+            if(j==next.getId()){
+                return next;
+            }
+        }
+        return null;
     }
 
     @Override
