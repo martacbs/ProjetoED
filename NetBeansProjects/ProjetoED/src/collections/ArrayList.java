@@ -6,157 +6,149 @@
 package collections;
 
 import java.util.Iterator;
+import recursos.exceptions.EmptyCollectionException;
 import recursos.interfaces.collections.ListADT;
 
-/**
- *
- * @author pmms8
- * @param <T>
- */
+
 public class ArrayList<T> implements ListADT<T> {
 
-    private final int DEFAULT_CAPACITY = 100;
-    private int first;
-    protected int last;
-    private int position;
-    protected T[] orederedList;
+    protected final int DEFAULT_CAPACITY = 100;
+   private final int NOT_FOUND = -1;
+   protected int rear;
+   protected T[] list; 
 
-    public ArrayList() {
-        this.first = 0;
-        this.last = 0;
-        this.position = -1;
-        this.orederedList = (T[]) new Object[this.DEFAULT_CAPACITY];
-    }
+     public ArrayList()
+   {
+      rear = 0;
+      list = (T[])(new Object[DEFAULT_CAPACITY]);
+   }
 
-    public ArrayList(int initialCapacity) {
-        this.first = 0;
-        this.last = 0;
-        this.position = -1;
-        this.orederedList = (T[]) new Object[initialCapacity];
-    }
+  public ArrayList (int initialCapacity)
+   {
+      rear = 0;
+      list = (T[])(new Object[initialCapacity]);
+   }
 
     @Override
-    public T removeFirst() throws recursos.exceptions.EmptyCollectionException {
+    public T removeFirst() throws EmptyCollectionException {
         T result;
 
-        if (isEmpty()) {
-            throw new recursos.exceptions.EmptyCollectionException("Empty List");
-        } else {
-            result = this.orederedList[0];
-            this.last--;
-            for (int i = 0; i < this.last; i++) {
-                this.orederedList[i] = this.orederedList[i + 1];
-            }
-            this.orederedList[this.last] = null;
-        }
-        return result;
+      if (isEmpty())
+         throw new EmptyCollectionException ("list");
+
+      rear--;
+      result = list[rear];
+      list[rear] = null;
+
+      return result;
     }
 
     @Override
-    public T removeLast() throws recursos.exceptions.EmptyCollectionException {
+    public T removeLast() throws EmptyCollectionException {
+        if (isEmpty())
+         throw new EmptyCollectionException ("list");
+
+      T result = list[0];
+      rear--;
+      /** shift the elements */
+      for (int scan=0; scan < rear; scan++)
+         list[scan] = list[scan+1];
+ 
+      list[rear] = null;
+ 
+      return result;
+    }
+
+    @Override
+    public T remove(T element) throws EmptyCollectionException {
         T result;
-        if (isEmpty()) {
-            throw new recursos.exceptions.EmptyCollectionException("Empty List");
-        } else {
-            this.last--;
-            result = this.orederedList[this.last];
-            this.orederedList[this.last] = null;
-        }
-        return result;
+      int index = find (element);
+
+      if (index == NOT_FOUND)
+         throw new EmptyCollectionException("list");
+
+      result = list[index];
+      rear--;
+      /** shift the appropriate elements */
+      for (int scan=index; scan < rear; scan++)
+         list[scan] = list[scan+1];
+ 
+      list[rear] = null;
+
+      return result;
     }
 
     @Override
-    public T remove(T element) throws recursos.exceptions.EmptyCollectionException {
-        T result = null;
-        if (contains(element)) {
-            result = this.orederedList[this.position];
-            this.last--;
-            for (int i = 0; i < this.last; i++) {
-                this.orederedList[i] = this.orederedList[i + 1];
-            }
-        }
-        return result;
+    public T first() throws EmptyCollectionException {
+        if (isEmpty())
+         throw new EmptyCollectionException ("list"); 
+
+      return list[0];
     }
 
     @Override
-    public T first() throws recursos.exceptions.EmptyCollectionException {
-        if (isEmpty()) {
-            throw new recursos.exceptions.EmptyCollectionException("Empty List");
-        } else {
-            return this.orederedList[this.first];
-        }
-    }
+    public T last() throws EmptyCollectionException {
+         if (isEmpty())
+         throw new EmptyCollectionException ("list"); 
 
-    @Override
-    public T last() throws recursos.exceptions.EmptyCollectionException {
-        if (isEmpty()) {
-            throw new recursos.exceptions.EmptyCollectionException("Empty List");
-        } else {
-            return this.orederedList[this.last - 1];
-        }
+      return list[rear-1];
     }
 
     @Override
     public boolean contains(T target) {
-        boolean contain = false;
-        int i = 0;
-        if (!isEmpty()) {
-            while (!contain && i < this.last) {
-                if (target.equals(this.orederedList[i])) {
-                    contain = true;
-                    this.position = i;
-                } else {
-                    ++i;
-                }
-            }
-        }
-        return contain;
+        return (find(target) != NOT_FOUND);
     }
 
+    private int find (T target)
+   {
+      int scan = 0, result = NOT_FOUND;
+      boolean found = false;
+
+      if (! isEmpty())
+         while (! found && scan < rear)
+            if (target.equals(list[scan]))
+               found = true;
+            else
+               scan++;
+
+      if (found)
+         result = scan;
+
+      return result;
+   }
+    
     @Override
     public boolean isEmpty() {
-        return this.last == 0;
+        return (rear == 0);
     }
 
     @Override
     public int size() {
-        int count = 0;
-
-        for (int i = 0; i < this.orederedList.length; ++i) {
-            if (this.orederedList[i] != null) {
-                ++count;
-            }
-        }
-        return count;
+        return rear;
     }
 
     @Override
     public Iterator<T> iterator() {
-        ArrayIterator<T> iterator = new ArrayIterator<>(this.orederedList, this.last);
-        return iterator;
+        return new ArrayIterator<T> (list, rear);
     }
 
     protected void expandCapacity() {
-        T[] temporaryArray = (T[]) new Object[this.orederedList.length * 2];
-        for (int i = 0; i < this.last; ++i) {
-            temporaryArray[i] = this.orederedList[i];
-        }
-        this.orederedList = temporaryArray;
-    }
+        T[] larger = (T[])(new Object[list.length*2]);
 
-    protected void setList(T[] list) {
-        this.orederedList = list;
-    }
+      for (int scan=0; scan < list.length; scan++)
+         larger[scan] = list[scan];
 
-    public void setLast(int newLast) {
-        this.last = newLast;
-    }
+      list = larger;
+   }
+    
 
-    protected int getLast() {
-        return this.last;
-    }
+    public String toString()
+   {
+      String result = "";
 
-    protected T[] getList() {
-        return this.orederedList;
-    }
+      for (int scan=0; scan < rear; scan++) 
+         result = result + list[scan].toString() + "\n";
+
+      return result;
+   }
 }

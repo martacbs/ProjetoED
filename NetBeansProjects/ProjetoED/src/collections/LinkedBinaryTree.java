@@ -2,148 +2,93 @@ package collections;
 
 import java.util.Iterator;
 import recursos.exceptions.ElementNotFoundException;
+import recursos.exceptions.EmptyCollectionException;
 import recursos.interfaces.collections.BinaryTreeADT;
 
 public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
 
-    public int count;
-    public BinaryTreeNode<T> root;
+    protected int count;
+   protected BinaryTreeNode<T> root;
+   
+   public LinkedBinaryTree() 
+   {
+      count = 0;
+      root = null;
+   }
 
-    public LinkedBinaryTree() {
-        this.count = 0;
-        this.root = null;
-    }
-
-    public LinkedBinaryTree(T element) {
-        this.count = 1;
-        this.root = new BinaryTreeNode<>(element);
-    }
+   public LinkedBinaryTree (T element) 
+   {
+      count = 1;
+      root = new BinaryTreeNode<T> (element);
+   }
 
     @Override
-    public T getRoot() {
-        return (T) this.root;
+    public T getRoot() throws EmptyCollectionException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean isEmpty() {
-        return (this.count == 0);
+       return (count == 0);
     }
 
     @Override
     public int size() {
-        return this.count;
+        return count;
     }
 
     @Override
-    public boolean contains(T targetElement) {
-        boolean found = false;
-
-        try {
-            T temp = find(targetElement);
-            found = true;
-        } catch (Exception ex) {
-            found = false;
-        }
-
-        return found;
+    public boolean contains(T t) {
+        T temp;
+      boolean found = false;
+      
+      try 
+      {
+         temp = find (t);
+         found = true;
+      }
+      catch (Exception ElementNotFoundException) 
+      {
+         found = false;
+      }
+      
+      return found;
     }
 
-    public T find(T targetElement) throws ElementNotFoundException {
-        BinaryTreeNode<T> current = findAgain(targetElement, root);
-
-        if (current == null) {
-            throw new ElementNotFoundException("binary tree");
-        }
-
-        return (current.element);
+    @Override
+    public T find(T t) throws ElementNotFoundException {
+        BinaryTreeNode<T> current = findAgain( t, root );
+      
+      if( current == null )
+         throw new ElementNotFoundException("binary tree");
+      
+      return (current.element);
     }
 
     @Override
     public Iterator<T> iteratorInOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
-        inorder(root, tempList);
-        return tempList.iterator();
-    }
-
-    protected void inorder(BinaryTreeNode<T> node, ArrayUnorderedList<T> tempList) {
-        if (node != null) {
-            inorder(node.left, tempList);
-            tempList.addToRear(node.element);
-            inorder(node.right, tempList);
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Iterator<T> iteratorPreOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
-        preOrder(this.root, tempList);
-        return tempList.iterator();
-    }
-
-    protected void preOrder(BinaryTreeNode<T> node, ArrayUnorderedList<T> tempList) {
-        if (node != null) {
-            tempList.addToRear(node.element);
-            preOrder(node.left, tempList);
-            preOrder(node.right, tempList);
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Iterator<T> iteratorPostOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
-        postOrder(root, tempList);
-        return tempList.iterator();
-    }
-
-    protected void postOrder(BinaryTreeNode<T> node, ArrayUnorderedList<T> tempList) {
-        if (node != null) {
-            postOrder(node.left, tempList);
-            postOrder(node.right, tempList);
-            tempList.addToRear(node.element);
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterator<T> iteratorLevelOrder() throws recursos.exceptions.EmptyCollectionException {
-        ArrayUnorderedList<T> nodes = new ArrayUnorderedList<>();
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
-
-        BinaryTreeNode<T> current = null;
-
-        while (!nodes.isEmpty()) {
-            try {
-                current = (BinaryTreeNode<T>) nodes.removeFirst();
-            } catch (recursos.exceptions.EmptyCollectionException ex) {
-
-            }
-
-            if (current != null) {
-                tempList.addToRear(current.element);
-                nodes.addToRear(current.left.element);
-                nodes.addToRear(current.right.element);
-            } else {
-                tempList.addToRear(null);
-            }
-        }
-        return tempList.iterator();
+    public Iterator<T> iteratorLevelOrder() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private BinaryTreeNode<T> findAgain(T targetElement, BinaryTreeNode<T> next) {
-        if (next == null) {
-            return null;
-        }
-        if (next.element.equals(targetElement)) {
-            return next;
-        }
-        BinaryTreeNode<T> temp = findAgain(targetElement, next.left);
-        if (temp == null) {
-            temp = findAgain(targetElement, next.right);
-        }
-        return temp;
+    private BinaryTreeNode<T> findAgain(T t, BinaryTreeNode<T> root) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void removeAllElements() {
-        count = 0;
-        root = null;
-    }
+   
+    
 }

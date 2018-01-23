@@ -8,37 +8,34 @@ package collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- *
- * @author pmms8
- *
- * @param <T>
- */
+
 public class ArrayIterator<T> implements Iterator<T> {
 
-    private int size;
-    private int current;
-    private T[] elements;
+    private int count;    
+   private int current;  
+   private T[] items;
 
     
-    public ArrayIterator(T[] collection, int size) {
-        this.elements = collection;
-        this.size = size;
-        this.current = 0;
-    }
+   public ArrayIterator (T[] collection, int size)
+   {
+      items = collection;
+      count = size;
+      current = 0;
+   }
 
     @Override
     public boolean hasNext() {
-        return (current < size);
+        return (current < count);
     }
 
     @Override
     public T next() {
-        if (!hasNext()) {
-            throw new NoSuchElementException();
-        }
-        current++;
-        return this.elements[current - 1];
+        if (! hasNext())
+         throw new NoSuchElementException();
+
+ 	  current++;
+ 	  
+      return items[current - 1]; 
 
     }
 }

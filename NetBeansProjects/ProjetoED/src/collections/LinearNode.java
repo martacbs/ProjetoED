@@ -5,15 +5,10 @@
  */
 package collections;
 
-/**
- *
- * @author pmms8
- * @param <T>
- */
+
 public class LinearNode<T> {
 
     private LinearNode<T> next;
-    private LinearNode<T> previous;
     private T element;
 
     public LinearNode() {
@@ -44,15 +39,6 @@ public class LinearNode<T> {
 
     @Override
     public String toString() {
-        return "LinearNode{" + "next=" + next + ", previous=" + previous + ", element=" + element + '}';
+        return "LinearNode{" + "next=" + next + ", element=" + element + '}';
     }
-
-    public LinearNode<T> getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(LinearNode<T> previous) {
-        this.previous = previous;
-    }
-
 }

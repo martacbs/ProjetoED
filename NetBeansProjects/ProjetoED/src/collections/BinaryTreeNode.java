@@ -3,11 +3,10 @@ package collections;
 public class BinaryTreeNode<T> {
 
     public T element;
-    public BinaryTreeNode<T> left;
-    public BinaryTreeNode<T> right;
+    public BinaryTreeNode<T> left,right;
 
-    public BinaryTreeNode(T element) {
-        this.element = element;
+    public BinaryTreeNode(T obj) {
+        this.element = obj;
         this.left = null;
         this.right = null;
     }
