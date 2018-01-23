@@ -5,96 +5,81 @@
  */
 package collections;
 
+import recursos.exceptions.EmptyCollectionException;
 import recursos.interfaces.collections.QueueADT;
+import recursos.interfaces.collections.StackADT;
 
-/**
- *
- * @author pmms8
- * @param <T>
- */
-public class LinkedStack<T> implements QueueADT<T> {
 
-    private int numberOfElements;
-    private LinearNode<T> head;
+public class LinkedStack<T> implements StackADT<T>{
 
-    public LinkedStack() {
-        this.numberOfElements = 0;
-        this.head = null;
+    private int count;  // indicates the next open slot
+    private LinearNode<T> first; 
+  
+    public LinkedStack(){
+    count = 0;
+    first = null;
+  }
+
+    
+    @Override
+    public void push(T t) {
+        LinearNode<T> newnode = new LinearNode<T> (t);
+
+    newnode.setNext(first);
+    first = newnode;
+    count++;
+    }
+
+    @Override
+    public T pop() throws EmptyCollectionException {
+        if (isEmpty()==true) {
+            throw new EmptyCollectionException("Not supported yet.");
+        }
+        
+        LinearNode<T> result = first;
+        first = first.getNext();
+        count--;
+        
+        return result.getElement();
+    }
+
+    @Override
+    public T peek() throws EmptyCollectionException {
+        if(isEmpty()==true){
+            throw new EmptyCollectionException("Not supported yet.");
+        }
+        return first.getElement();
     }
 
     @Override
     public boolean isEmpty() {
-        return this.numberOfElements == 0;
+        if(size()==0){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public int size() {
-        return this.numberOfElements;
+        return this.count;
     }
 
-    @Override
-    public String toString() {
-        this.printAll();
-        return "";
+    public int getCount() {
+        return count;
     }
 
-    public void printAll() {
-        LinearNode<T> elementoAtual = this.head;
-
-        if (elementoAtual != null) {
-            while (elementoAtual.getNext() != null) {
-                System.out.print(elementoAtual.getElement() + " -> ");
-                elementoAtual = elementoAtual.getNext();
-            }
-            System.out.println(elementoAtual.getElement());
-        }
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    @Override
-    public void enqueue(T element) {
-        if (head == null) {
-            head = new LinearNode<>(element);
-        } else {
-            LinearNode<T> novoElemento = new LinearNode<>(element);
-            LinearNode<T> elementoAtual = this.head;
-            while (elementoAtual.getNext() != null) {
-                elementoAtual = elementoAtual.getNext();
-            }
-            novoElemento.setNext(this.head);
-            this.head = novoElemento;
-        }
-        this.numberOfElements++;
+    public LinearNode<T> getFirst() {
+        return first;
     }
 
-    @Override
-    public T dequeue() throws recursos.exceptions.EmptyCollectionException {
-        T element = null;
-        LinearNode<T> atual = this.head;
-        switch (this.numberOfElements) {
-            case 0:
-                throw new recursos.exceptions.EmptyCollectionException("Não há elementos a eliminar!");
-            case 1:
-                element = atual.getElement();
-                this.head = null;
-                break;
-            default:
-                element = atual.getElement();
-                this.head = this.head.getNext();
-                break;
-        }
-        this.numberOfElements--;
-        return element;
+    public void setFirst(LinearNode<T> first) {
+        this.first = first;
     }
-
-    @Override
-    public T first() throws recursos.exceptions.EmptyCollectionException {
-        if (isEmpty()) {
-            throw new recursos.exceptions.EmptyCollectionException("Stack Vazia");
-        }
-        return this.head.getElement();
-    }
-
-    public StackIterator<?> getIterator() {
-        return new StackIterator<>(this.head);
-    }
+    
+    
 }

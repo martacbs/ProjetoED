@@ -19,9 +19,10 @@ public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedList
    
     @Override
     public void addToFront(T t) {
-        if (size() == list.length)
+        
+        if (size() == list.length){
          expandCapacity();
-
+        }
      
       for (int scan=rear; scan > 0; scan--)
          list[scan] = list[scan-1];

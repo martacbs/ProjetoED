@@ -32,8 +32,9 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T>{
          HeapNode<T> next_parent = getNextParentAdd(); 
          if (next_parent.left == null)
             next_parent.left = node;
-         else
+         else{
             next_parent.right = node;
+         }
          node.parent = next_parent;
       }
       lastNode = node;
@@ -73,8 +74,10 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T>{
 
     @Override
     public T findMin() throws EmptyCollectionException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        if (isEmpty()) {
+            throw new EmptyCollectionException("Heap vazia!!");
+        }return root.element;
+ }
 
     private HeapNode<T> getNextParentAdd() {
         HeapNode<T> result = lastNode;
@@ -100,15 +103,15 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T>{
     private void heapifyAdd() {
         T temp;
       HeapNode<T> next = lastNode;
-      
+      temp = next.element;
       while ((next != root) && (((Comparable)
               next.element).compareTo(next.parent.element) < 0))
       {
-         temp = next.element;
+         
          next.element = next.parent.element;
-         next.parent.element = temp;
-         next = next.parent;
-      }
+         next=next.parent;
+      }   next.element=temp;
+      
     }
 
     private void heapifyRemove() {
@@ -128,11 +131,12 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T>{
          next = left;
       else
          next = right;
-
+        
+      temp = node.element;
       while ((next != null) && (((Comparable)
               next.element).compareTo(node.element) < 0))
       {
-         temp = node.element;
+         
          node.element = next.element;
          next.element = temp;
          node = next;
@@ -165,6 +169,13 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T>{
          result = (HeapNode<T>)result.right;
 
       return result;
+    }
+
+    void removeAllElements() throws EmptyCollectionException{
+        while (!isEmpty()) {
+            removeMin();
+        }
+        throw new EmptyCollectionException("não há elementos");
     }
     
 }

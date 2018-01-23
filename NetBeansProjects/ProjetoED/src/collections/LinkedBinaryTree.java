@@ -67,28 +67,94 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public Iterator<T> iteratorInOrder() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+      inorder (root, tempList);
+      
+      return tempList.iterator();
     }
 
     @Override
     public Iterator<T> iteratorPreOrder() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+       ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+      preorder (root, tempList);
+      
+      return tempList.iterator();
+              }
 
     @Override
     public Iterator<T> iteratorPostOrder() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+      postorder (root, tempList);
+      
+      return tempList.iterator();
     }
 
     @Override
     public Iterator<T> iteratorLevelOrder() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        ArrayUnorderedList<BinaryTreeNode<T>> nodes = 
+                       new ArrayUnorderedList<BinaryTreeNode<T>>();
+      ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+      BinaryTreeNode<T> current;
+
+      nodes.addToRear (root);
+      
+      while (! nodes.isEmpty()) 
+      {
+         current = (BinaryTreeNode<T>)(nodes.removeFirst());
+         
+         if (current != null)
+         {
+            tempList.addToRear(current.element);
+            if (current.left!=null)
+               nodes.addToRear (current.left);
+            if (current.right!=null)
+               nodes.addToRear (current.right);
+         }
+         else
+            tempList.addToRear(null);
+      }
+      
+      return tempList.iterator();
+   }
+
 
     private BinaryTreeNode<T> findAgain(T t, BinaryTreeNode<T> root) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (root == null)
+         return null;
+      
+      if (root.element.equals(t))
+         return root;
+      
+      BinaryTreeNode<T> temp = findAgain(t, root.left);
+      
+      if (temp == null)
+         temp = findAgain(t, root.right);
+      
+      return temp;}
+
+    private void inorder(BinaryTreeNode<T> root, ArrayUnorderedList<T> tempList) {
+         if (root != null)
+      {
+         inorder (root.left, tempList);
+         tempList.addToRear(root.element);
+         inorder (root.right, tempList);
+      }
     }
 
-   
-    
+    private void preorder(BinaryTreeNode<T> root, ArrayUnorderedList<T> tempList) {
+        if (root != null)
+      {
+         tempList.addToRear(root.element);
+         preorder (root.left, tempList);
+         preorder (root.right, tempList);
+      } }
+
+    private void postorder(BinaryTreeNode<T> root, ArrayUnorderedList<T> tempList) {
+        if (root != null)
+      {
+         postorder (root.left, tempList);
+         postorder (root.right, tempList);
+         tempList.addToRear(root.element);
+      }
+    }   
 }

@@ -5,98 +5,73 @@
  */
 package collections;
 
+import recursos.exceptions.EmptyCollectionException;
 import recursos.interfaces.collections.QueueADT;
 
-/**
- *
- * @author pmms8
- * @param <T>
- */
 public class LinkedQueue<T> implements QueueADT<T> {
 
-    private int numberOfElements;
-    private LinearNode<T> head;
-    private LinearNode<T> tail;
+    private int count;
+    private LinearNode<T> front, rear;
 
     public LinkedQueue() {
-        this.numberOfElements = 0;
-        this.head = null;
-        this.tail = null;
+        count = 0;
+        front = rear = null;
+    }
+
+    @Override
+    public void enqueue(T t) {
+        LinearNode<T> newnode = new LinearNode<T>(t);
+
+        if(count!=0){
+            rear.setNext(newnode);
+            rear=newnode;
+        }else{
+            front=newnode;
+            rear=newnode;
+        }
+        count++;
+    }
+
+    @Override
+    public T dequeue() throws EmptyCollectionException {
+        if (isEmpty()) {
+            throw new EmptyCollectionException("Queue");
+        }else{
+        
+        T result = front.getElement();
+        front = front.getNext();
+        count--;
+        return result;
+        } 
+    }
+
+    @Override
+    public T first() throws EmptyCollectionException {
+        if (isEmpty()) {
+            throw new EmptyCollectionException("queue empty");
+        }
+        return front.getElement();
+    }
+    
+    public T last(){
+       if (isEmpty()) {
+            throw new EmptyCollectionException("queue empty");
+        }
+       return rear.getElement();
     }
 
     @Override
     public boolean isEmpty() {
-        return this.numberOfElements == 0;
+        if(count==0){
+        return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
     public int size() {
-        return this.numberOfElements;
+        return count;
     }
 
-    @Override
-    public String toString() {
-        String output = "";
-        LinearNode<T> elementoAtual = this.head;
-
-        if (elementoAtual != null) {
-            while (elementoAtual != null) {
-                output += elementoAtual.getElement() + " -> ";
-                elementoAtual = elementoAtual.getNext();
-            }
-        }
-        return output;
-    }
-
-    @Override
-    public void enqueue(T element) {
-
-        if (head == null) {
-            head = new LinearNode<>(element);
-        } else {
-            LinearNode<T> novoElemento = new LinearNode<>(element);
-            LinearNode<T> elementoAtual = this.head;
-
-            while (elementoAtual.getNext() != null) {
-                elementoAtual = elementoAtual.getNext();
-            }
-            elementoAtual.setNext(novoElemento);
-            this.tail = elementoAtual.getNext();
-            this.tail.setPrevious(elementoAtual);
-        }
-        this.numberOfElements++;
-    }
-
-    @Override
-    public T dequeue() throws recursos.exceptions.EmptyCollectionException {
-        T element = null;
-        LinearNode<T> atual = this.head;
-        switch (this.numberOfElements) {
-            case 0:
-                throw new recursos.exceptions.EmptyCollectionException("Não há elementos a eliminar!");
-            case 1:
-
-                element = atual.getElement();
-                this.head = null;
-                break;
-            default:
-                element = atual.getElement();
-                this.head = this.head.getNext();
-                break;
-        }
-        this.numberOfElements--;
-        return element;
-    }
-
-    @Override
-    public T first() throws recursos.exceptions.EmptyCollectionException {
-        if (isEmpty()) {
-            throw new recursos.exceptions.EmptyCollectionException("Queue Vazia");
-        }
-        return this.head.getElement();
-    }
-
-    public StackIterator<?> getIterator() {
-        return new StackIterator<>(this.head);
-    }
 }

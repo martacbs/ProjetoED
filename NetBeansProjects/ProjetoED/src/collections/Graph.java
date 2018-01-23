@@ -220,13 +220,13 @@ public class Graph<T> implements GraphADT<T>
       for (int i = 0; i < numVertices; i++)
          visited[i] = false;
       
-      traversalStack.enqueue(startIndex);
+      traversalStack.push(startIndex);
       resultList.addToRear(vertices[startIndex]);
       visited[startIndex] = true;
       
       while (!traversalStack.isEmpty())
       {
-         x = traversalStack.first();
+         x = traversalStack.peek();
          found = false;
 
          /** Find a vertex adjacent to x that has not been visited
@@ -235,14 +235,14 @@ public class Graph<T> implements GraphADT<T>
          {
             if (adjMatrix[x][i] && !visited[i])
             {
-               traversalStack.enqueue(i);
+               traversalStack.push(i);
                resultList.addToRear(vertices[i]);
                visited[i] = true;
                found = true;
             }
          }
          if (!found && !traversalStack.isEmpty())
-            traversalStack.dequeue();
+            traversalStack.pop();
       }
       return resultList.iterator();
    }
@@ -364,15 +364,15 @@ public class Graph<T> implements GraphADT<T>
 
       LinkedStack<Integer> stack = new LinkedStack<>();
       index = targetIndex;
-      stack.enqueue(index);
+      stack.push(index);
       do
       {
          index = predecessor[index];
-         stack.enqueue(index);
+         stack.push(index);
       } while (index != startIndex);
       
       while (!stack.isEmpty())
-         resultList.addToRear((stack.dequeue()));
+         resultList.addToRear((stack.pop()));
 
       return resultList.iterator();
    }
@@ -493,7 +493,7 @@ public class Graph<T> implements GraphADT<T>
          if (!visited[i] && this.adjMatrix[0][i])
          {
             edge[1] = i;
-            vertexStack.enqueue(edge.clone());
+            vertexStack.push(edge.clone());
             visited[i] = true;
          }
       }
@@ -501,7 +501,7 @@ public class Graph<T> implements GraphADT<T>
       while ((resultGraph.size() < this.size()) && !vertexStack.isEmpty())
       {
          /** Pop an edge off the stack and add it to the resultGraph. */
-         edge = vertexStack.dequeue();
+         edge = vertexStack.pop();
          x = edge[0];
          y = edge[1];
          resultGraph.vertices[y] = this.vertices[y];
@@ -518,7 +518,7 @@ public class Graph<T> implements GraphADT<T>
             {
                edge[0] = y;
                edge[1] = i;
-               vertexStack.enqueue(edge.clone());
+               vertexStack.push(edge.clone());
                visited[i] = true;
             }
          }
