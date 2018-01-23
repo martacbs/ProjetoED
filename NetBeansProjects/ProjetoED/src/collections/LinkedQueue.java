@@ -12,14 +12,16 @@ import recursos.interfaces.collections.QueueADT;
  * @author pmms8
  * @param <T>
  */
-public class LinkedStack<T> implements QueueADT<T> {
+public class LinkedQueue<T> implements QueueADT<T> {
 
     private int numberOfElements;
     private LinearNode<T> head;
+    private LinearNode<T> tail;
 
-    public LinkedStack() {
+    public LinkedQueue() {
         this.numberOfElements = 0;
         this.head = null;
+        this.tail = null;
     }
 
     @Override
@@ -34,34 +36,33 @@ public class LinkedStack<T> implements QueueADT<T> {
 
     @Override
     public String toString() {
-        this.printAll();
-        return "";
-    }
-
-    public void printAll() {
+        String output = "";
         LinearNode<T> elementoAtual = this.head;
 
         if (elementoAtual != null) {
-            while (elementoAtual.getNext() != null) {
-                System.out.print(elementoAtual.getElement() + " -> ");
+            while (elementoAtual != null) {
+                output += elementoAtual.getElement() + " -> ";
                 elementoAtual = elementoAtual.getNext();
             }
-            System.out.println(elementoAtual.getElement());
         }
+        return output;
     }
 
     @Override
     public void enqueue(T element) {
+
         if (head == null) {
             head = new LinearNode<>(element);
         } else {
             LinearNode<T> novoElemento = new LinearNode<>(element);
             LinearNode<T> elementoAtual = this.head;
+
             while (elementoAtual.getNext() != null) {
                 elementoAtual = elementoAtual.getNext();
             }
-            novoElemento.setNext(this.head);
-            this.head = novoElemento;
+            elementoAtual.setNext(novoElemento);
+            this.tail = elementoAtual.getNext();
+            this.tail.setPrevious(elementoAtual);
         }
         this.numberOfElements++;
     }
@@ -74,6 +75,7 @@ public class LinkedStack<T> implements QueueADT<T> {
             case 0:
                 throw new recursos.exceptions.EmptyCollectionException("Não há elementos a eliminar!");
             case 1:
+
                 element = atual.getElement();
                 this.head = null;
                 break;
@@ -89,7 +91,7 @@ public class LinkedStack<T> implements QueueADT<T> {
     @Override
     public T first() throws recursos.exceptions.EmptyCollectionException {
         if (isEmpty()) {
-            throw new recursos.exceptions.EmptyCollectionException("Stack Vazia");
+            throw new recursos.exceptions.EmptyCollectionException("Queue Vazia");
         }
         return this.head.getElement();
     }

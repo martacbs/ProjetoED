@@ -1,57 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package collections;
 
 import java.util.Iterator;
 import recursos.exceptions.ElementNotFoundException;
-import recursos.exceptions.EmptyCollectionException;
 import recursos.interfaces.collections.BinaryTreeADT;
 
-/**
- *
- * @author martasantos
- */
 public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
 
-    protected int count;
-    protected BinaryTreeNode<T> root;
+    public int count;
+    public BinaryTreeNode<T> root;
+
+    public LinkedBinaryTree() {
+        this.count = 0;
+        this.root = null;
+    }
+
+    public LinkedBinaryTree(T element) {
+        this.count = 1;
+        this.root = new BinaryTreeNode<>(element);
+    }
 
     @Override
-    public T getRoot() throws EmptyCollectionException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public T getRoot() {
+        return (T) this.root;
     }
 
     @Override
     public boolean isEmpty() {
-        return (count == 0);
+        return (this.count == 0);
     }
 
     @Override
     public int size() {
-        return count;
+        return this.count;
     }
 
     @Override
-    public boolean contains(T t) {
-        T temp;
+    public boolean contains(T targetElement) {
         boolean found = false;
 
         try {
-            temp = find(t);
+            T temp = find(targetElement);
             found = true;
-        } catch (Exception ElementNotFoundException) {
+        } catch (Exception ex) {
             found = false;
         }
 
         return found;
     }
 
-    @Override
-    public T find(T t) throws ElementNotFoundException {
-        BinaryTreeNode<T> current = findAgain(t, root);
+    public T find(T targetElement) throws ElementNotFoundException {
+        BinaryTreeNode<T> current = findAgain(targetElement, root);
 
         if (current == null) {
             throw new ElementNotFoundException("binary tree");
@@ -62,93 +60,90 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
 
     @Override
     public Iterator<T> iteratorInOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
         inorder(root, tempList);
-
         return tempList.iterator();
+    }
+
+    protected void inorder(BinaryTreeNode<T> node, ArrayUnorderedList<T> tempList) {
+        if (node != null) {
+            inorder(node.left, tempList);
+            tempList.addToRear(node.element);
+            inorder(node.right, tempList);
+        }
     }
 
     @Override
     public Iterator<T> iteratorPreOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
-        preorder(root, tempList);
-
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
+        preOrder(this.root, tempList);
         return tempList.iterator();
+    }
+
+    protected void preOrder(BinaryTreeNode<T> node, ArrayUnorderedList<T> tempList) {
+        if (node != null) {
+            tempList.addToRear(node.element);
+            preOrder(node.left, tempList);
+            preOrder(node.right, tempList);
+        }
     }
 
     @Override
     public Iterator<T> iteratorPostOrder() {
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
-        postorder(root, tempList);
-
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
+        postOrder(root, tempList);
         return tempList.iterator();
     }
 
-    @Override
-    public Iterator<T> iteratorLevelOrder() {
-        ArrayUnorderedList<BinaryTreeNode<T>> nodes
-                = new ArrayUnorderedList<BinaryTreeNode<T>>();
-        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<T>();
-        BinaryTreeNode<T> current;
+    protected void postOrder(BinaryTreeNode<T> node, ArrayUnorderedList<T> tempList) {
+        if (node != null) {
+            postOrder(node.left, tempList);
+            postOrder(node.right, tempList);
+            tempList.addToRear(node.element);
+        }
+    }
 
-        nodes.addToRear(root);
+    @Override
+    public Iterator<T> iteratorLevelOrder() throws recursos.exceptions.EmptyCollectionException {
+        ArrayUnorderedList<T> nodes = new ArrayUnorderedList<>();
+        ArrayUnorderedList<T> tempList = new ArrayUnorderedList<>();
+
+        BinaryTreeNode<T> current = null;
 
         while (!nodes.isEmpty()) {
-            current = (BinaryTreeNode<T>) (nodes.removeFirst());
+            try {
+                current = (BinaryTreeNode<T>) nodes.removeFirst();
+            } catch (recursos.exceptions.EmptyCollectionException ex) {
+
+            }
 
             if (current != null) {
                 tempList.addToRear(current.element);
-                if (current.left != null) {
-                    nodes.addToRear(current.left);
-                }
-                if (current.right != null) {
-                    nodes.addToRear(current.right);
-                }
+                nodes.addToRear(current.left.element);
+                nodes.addToRear(current.right.element);
             } else {
                 tempList.addToRear(null);
             }
         }
-
         return tempList.iterator();
     }
 
-    private void inorder(BinaryTreeNode<T> root, ArrayUnorderedList<T> tempList) {
-        if (root != null){
-         inorder (root.left, tempList);
-         tempList.addToRear(root.element);
-         inorder (root.right, tempList);
-      }}
-
-    private void postorder(BinaryTreeNode<T> root, ArrayUnorderedList<T> tempList) {
-        if (root != null){
-         postorder (root.left, tempList);
-         postorder (root.right, tempList);
-         tempList.addToRear(root.element);
-      }
+    private BinaryTreeNode<T> findAgain(T targetElement, BinaryTreeNode<T> next) {
+        if (next == null) {
+            return null;
+        }
+        if (next.element.equals(targetElement)) {
+            return next;
+        }
+        BinaryTreeNode<T> temp = findAgain(targetElement, next.left);
+        if (temp == null) {
+            temp = findAgain(targetElement, next.right);
+        }
+        return temp;
     }
 
-    private void preorder(BinaryTreeNode<T> root, ArrayUnorderedList<T> tempList) {
-          if (root != null)
-      {
-         tempList.addToRear(root.element);
-         preorder (root.left, tempList);
-         preorder (root.right, tempList);
-      }
+    public void removeAllElements() {
+        count = 0;
+        root = null;
     }
-
-    private BinaryTreeNode<T> findAgain(T t, BinaryTreeNode<T> root) {
-        if (root == null)
-         return null;
-      
-      if (root.element.equals(t))
-         return root;
-      
-      BinaryTreeNode<T> temp = findAgain(t, root.left);
-      
-      if (temp == null)
-         temp = findAgain(t, root.right);
-      
-      return temp;}
 }
-
-
