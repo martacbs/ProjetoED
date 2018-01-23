@@ -40,4 +40,11 @@ public class Comida implements IComida{
     public void setTamanho(int i) {
         this.tamanho_comida=tamanho_comida;
     }
+
+    @Override
+    public String toString() {
+        return "Comida{" + "id_comida=" + id_comida + ", tamanho_comida=" + tamanho_comida + '}';
+    }
+    
+    
 }

@@ -5,6 +5,8 @@
  */
 package models;
 
+import collections.ArrayUnorderedList;
+import collections.Network;
 import java.util.Iterator;
 import recursos.exceptions.ElementNotFoundException;
 import recursos.interfaces.IComida;
@@ -22,44 +24,49 @@ import recursos.interfaces.ITunel;
  */
 public class Formigueiro implements IFormigueiro{
 
-    private Sala salas;
-    private Formiga formigas;
+    private Sala entrada_sala;
     private Tunel tunel;
+    private ArrayUnorderedList<Sala> salas;
+    private ArrayUnorderedList<Formiga> formigas;
+    private Network<ISala> network;
 
-    public Formigueiro(Sala salas, Formiga formigas, Tunel tunel) {
+    public Formigueiro(Sala entrada_sala, Tunel tunel, ArrayUnorderedList<Sala> salas, ArrayUnorderedList<Formiga> formigas) {
+        this.entrada_sala = entrada_sala;
+        this.tunel = tunel;
         this.salas = salas;
         this.formigas = formigas;
-        this.tunel = tunel;
     }
- 
+    
+  
     @Override
     public ISala getEntrada() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.entrada_sala;
     }
 
     @Override
     public void setEntrada(ISala isala) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        this.entrada_sala = entrada_sala;
+         }
 
     @Override
     public Iterator<ISala> iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Iterator<ISala>) this.salas.getIterator();
+    
     }
 
     @Override
     public Iterator<ISala> iteratorBFS(ISala isala) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return network.iteratorBFS(isala);
     }
 
     @Override
     public Iterator<ISala> iteratorBFS() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return network.iteratorBFS(entrada_sala);
     }
 
     @Override
     public void addSala(ISala isala) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
